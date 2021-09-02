@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PrivmsgMessage | dank-twitch-irc</title>
-	<meta name="description" content="Documentation for dank-twitch-irc">
+	<title>PrivmsgMessage | @aidenhadisi/dank-twitch-irc</title>
+	<meta name="description" content="Documentation for @aidenhadisi/dank-twitch-irc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">dank-twitch-irc</a>
+					<a href="../index.html" class="title">@aidenhadisi/dank-twitch-irc</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -51,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">@aidenhadisi/dank-twitch-irc</a>
 				</li>
 				<li>
 					<a href="privmsgmessage.html">PrivmsgMessage</a>
@@ -68,15 +69,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="channelircmessage.html" class="tsd-signature-type">ChannelIRCMessage</a>
+						<a href="channelircmessage.html" class="tsd-signature-type" data-tsd-kind="Class">ChannelIRCMessage</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">PrivmsgMessage</span>
-								<ul class="tsd-hierarchy">
-									<li>
-										<a href="../interfaces/cheerprivmsgmessage.html" class="tsd-signature-type">CheerPrivmsgMessage</a>
-									</li>
-								</ul>
 							</li>
 						</ul>
 					</li>
@@ -85,8 +81,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/ircmessagedata.html" class="tsd-signature-type">IRCMessageData</a></li>
-					<li><span class="tsd-signature-symbol">{}</span></li>
+					<li><a href="../modules.html#privmsguserstate" class="tsd-signature-type" data-tsd-kind="Type alias">PrivmsgUserState</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -150,23 +145,23 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Privmsg<wbr>Message<span class="tsd-signature-symbol">(</span>ircMessage<span class="tsd-signature-symbol">: </span><a href="ircmessage.html" class="tsd-signature-type">IRCMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="privmsgmessage.html" class="tsd-signature-type">PrivmsgMessage</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Privmsg<wbr>Message<span class="tsd-signature-symbol">(</span>ircMessage<span class="tsd-signature-symbol">: </span><a href="ircmessage.html" class="tsd-signature-type" data-tsd-kind="Class">IRCMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="privmsgmessage.html" class="tsd-signature-type" data-tsd-kind="Class">PrivmsgMessage</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L103">lib/message/twitch-types/privmsg.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L106">lib/message/twitch-types/privmsg.ts:106</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>ircMessage: <a href="ircmessage.html" class="tsd-signature-type">IRCMessage</a></h5>
+									<h5>ircMessage: <a href="ircmessage.html" class="tsd-signature-type" data-tsd-kind="Class">IRCMessage</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="privmsgmessage.html" class="tsd-signature-type">PrivmsgMessage</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="privmsgmessage.html" class="tsd-signature-type" data-tsd-kind="Class">PrivmsgMessage</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -176,10 +171,11 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="badgeinfo" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> badge<wbr>Info</h3>
-					<div class="tsd-signature tsd-kind-icon">badge<wbr>Info<span class="tsd-signature-symbol">:</span> <a href="twitchbadgeslist.html" class="tsd-signature-type">TwitchBadgesList</a></div>
+					<div class="tsd-signature tsd-kind-icon">badge<wbr>Info<span class="tsd-signature-symbol">:</span> <a href="twitchbadgeslist.html" class="tsd-signature-type" data-tsd-kind="Class">TwitchBadgesList</a></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.badgeInfo</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L54">lib/message/twitch-types/privmsg.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L57">lib/message/twitch-types/privmsg.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -188,18 +184,20 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> badge<wbr>Info<wbr>Raw</h3>
 					<div class="tsd-signature tsd-kind-icon">badge<wbr>Info<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.badgeInfoRaw</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L55">lib/message/twitch-types/privmsg.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L58">lib/message/twitch-types/privmsg.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="badges" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> badges</h3>
-					<div class="tsd-signature tsd-kind-icon">badges<span class="tsd-signature-symbol">:</span> <a href="twitchbadgeslist.html" class="tsd-signature-type">TwitchBadgesList</a></div>
+					<div class="tsd-signature tsd-kind-icon">badges<span class="tsd-signature-symbol">:</span> <a href="twitchbadgeslist.html" class="tsd-signature-type" data-tsd-kind="Class">TwitchBadgesList</a></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.badges</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L57">lib/message/twitch-types/privmsg.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L60">lib/message/twitch-types/privmsg.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -208,28 +206,29 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> badges<wbr>Raw</h3>
 					<div class="tsd-signature tsd-kind-icon">badges<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.badgesRaw</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L58">lib/message/twitch-types/privmsg.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L61">lib/message/twitch-types/privmsg.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="bits" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> bits</h3>
-					<div class="tsd-signature tsd-kind-icon">bits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">bits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L60">lib/message/twitch-types/privmsg.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L63">lib/message/twitch-types/privmsg.ts:63</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="bitsraw" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> bits<wbr>Raw</h3>
-					<div class="tsd-signature tsd-kind-icon">bits<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">bits<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L61">lib/message/twitch-types/privmsg.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L64">lib/message/twitch-types/privmsg.ts:64</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -239,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">channelID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L100">lib/message/twitch-types/privmsg.ts:100</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L103">lib/message/twitch-types/privmsg.ts:103</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -250,17 +249,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#channelname">channelName</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/channel-irc-message.ts#L31">lib/message/irc/channel-irc-message.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/channel-irc-message.ts#L31">lib/message/irc/channel-irc-message.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="color" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> color</h3>
-					<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <a href="../interfaces/color.html" class="tsd-signature-type">Color</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/color.html" class="tsd-signature-type" data-tsd-kind="Interface">Color</a></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.color</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L63">lib/message/twitch-types/privmsg.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L66">lib/message/twitch-types/privmsg.ts:66</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -269,8 +269,9 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> color<wbr>Raw</h3>
 					<div class="tsd-signature tsd-kind-icon">color<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.colorRaw</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L64">lib/message/twitch-types/privmsg.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L67">lib/message/twitch-types/privmsg.ts:67</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -279,18 +280,19 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> display<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.displayName</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L66">lib/message/twitch-types/privmsg.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L69">lib/message/twitch-types/privmsg.ts:69</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="emotes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> emotes</h3>
-					<div class="tsd-signature tsd-kind-icon">emotes<span class="tsd-signature-symbol">:</span> <a href="../globals.html#twitchemotelist" class="tsd-signature-type">TwitchEmoteList</a></div>
+					<div class="tsd-signature tsd-kind-icon">emotes<span class="tsd-signature-symbol">:</span> <a href="../modules.html#twitchemotelist" class="tsd-signature-type" data-tsd-kind="Type alias">TwitchEmoteList</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L68">lib/message/twitch-types/privmsg.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L71">lib/message/twitch-types/privmsg.ts:71</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -300,17 +302,17 @@
 					<div class="tsd-signature tsd-kind-icon">emotes<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L69">lib/message/twitch-types/privmsg.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L72">lib/message/twitch-types/privmsg.ts:72</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="flags" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> flags</h3>
-					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <a href="../globals.html#twitchflaglist" class="tsd-signature-type">TwitchFlagList</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TwitchFlagList</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L82">lib/message/twitch-types/privmsg.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L85">lib/message/twitch-types/privmsg.ts:85</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -329,10 +331,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="flagsraw" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> flags<wbr>Raw</h3>
-					<div class="tsd-signature tsd-kind-icon">flags<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">flags<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L93">lib/message/twitch-types/privmsg.ts:93</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L96">lib/message/twitch-types/privmsg.ts:96</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -351,10 +353,9 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> irc<wbr>Command</h3>
 					<div class="tsd-signature tsd-kind-icon">irc<wbr>Command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#irccommand">ircCommand</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#irccommand">ircCommand</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#irccommand">ircCommand</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L28">lib/message/irc/irc-message.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L28">lib/message/irc/irc-message.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -368,46 +369,42 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> irc<wbr>Parameters</h3>
 					<div class="tsd-signature tsd-kind-icon">irc<wbr>Parameters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#ircparameters">ircParameters</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#ircparameters">ircParameters</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#ircparameters">ircParameters</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L29">lib/message/irc/irc-message.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L29">lib/message/irc/irc-message.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ircprefix" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> irc<wbr>Prefix</h3>
-					<div class="tsd-signature tsd-kind-icon">irc<wbr>Prefix<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ircmessageprefix.html" class="tsd-signature-type">IRCMessagePrefix</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">irc<wbr>Prefix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ircmessageprefix.html" class="tsd-signature-type" data-tsd-kind="Interface">IRCMessagePrefix</a></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#ircprefix">ircPrefix</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#ircprefix">ircPrefix</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#ircprefix">ircPrefix</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L23">lib/message/irc/irc-message.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L23">lib/message/irc/irc-message.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ircprefixraw" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> irc<wbr>Prefix<wbr>Raw</h3>
-					<div class="tsd-signature tsd-kind-icon">irc<wbr>Prefix<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<div class="tsd-signature tsd-kind-icon">irc<wbr>Prefix<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#ircprefixraw">ircPrefixRaw</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#ircprefixraw">ircPrefixRaw</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#ircprefixraw">ircPrefixRaw</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L22">lib/message/irc/irc-message.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L22">lib/message/irc/irc-message.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="irctags" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> irc<wbr>Tags</h3>
-					<div class="tsd-signature tsd-kind-icon">irc<wbr>Tags<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ircmessagetags.html" class="tsd-signature-type">IRCMessageTags</a></div>
+					<div class="tsd-signature tsd-kind-icon">irc<wbr>Tags<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ircmessagetags.html" class="tsd-signature-type" data-tsd-kind="Interface">IRCMessageTags</a></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#irctags">ircTags</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#irctags">ircTags</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#irctags">ircTags</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L30">lib/message/irc/irc-message.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L30">lib/message/irc/irc-message.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -417,7 +414,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Action<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L49">lib/message/twitch-types/privmsg.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L52">lib/message/twitch-types/privmsg.ts:52</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -426,8 +423,9 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Mod</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Mod<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.isMod</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L97">lib/message/twitch-types/privmsg.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L100">lib/message/twitch-types/privmsg.ts:100</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -436,8 +434,9 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Mod<wbr>Raw</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Mod<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of PrivmsgUserState.isModRaw</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L98">lib/message/twitch-types/privmsg.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L101">lib/message/twitch-types/privmsg.ts:101</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -447,7 +446,7 @@
 					<div class="tsd-signature tsd-kind-icon">messageID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L95">lib/message/twitch-types/privmsg.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L98">lib/message/twitch-types/privmsg.ts:98</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -457,7 +456,7 @@
 					<div class="tsd-signature tsd-kind-icon">message<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L48">lib/message/twitch-types/privmsg.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L51">lib/message/twitch-types/privmsg.ts:51</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -466,10 +465,9 @@
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> raw<wbr>Source</h3>
 					<div class="tsd-signature tsd-kind-icon">raw<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ircmessagedata.html">IRCMessageData</a>.<a href="../interfaces/ircmessagedata.html#rawsource">rawSource</a></p>
-						<p>Inherited from <a href="ircmessage.html">IRCMessage</a>.<a href="ircmessage.html#rawsource">rawSource</a></p>
+						<p>Inherited from <a href="channelircmessage.html">ChannelIRCMessage</a>.<a href="channelircmessage.html#rawsource">rawSource</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/irc/irc-message.ts#L20">lib/message/irc/irc-message.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/irc/irc-message.ts#L20">lib/message/irc/irc-message.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -479,7 +477,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<wbr>UserID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L52">lib/message/twitch-types/privmsg.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L55">lib/message/twitch-types/privmsg.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -489,7 +487,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<wbr>Username<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L51">lib/message/twitch-types/privmsg.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L54">lib/message/twitch-types/privmsg.ts:54</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -499,7 +497,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L102">lib/message/twitch-types/privmsg.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L105">lib/message/twitch-types/privmsg.ts:105</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -509,7 +507,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<wbr>Timestamp<wbr>Raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L103">lib/message/twitch-types/privmsg.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L106">lib/message/twitch-types/privmsg.ts:106</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -520,22 +518,22 @@
 					<a name="extractuserstate" class="tsd-anchor"></a>
 					<h3>extract<wbr>User<wbr>State</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">extract<wbr>User<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#privmsguserstate" class="tsd-signature-type">PrivmsgUserState</a></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>User<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#privmsguserstate" class="tsd-signature-type" data-tsd-kind="Type alias">PrivmsgUserState</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L155">lib/message/twitch-types/privmsg.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L158">lib/message/twitch-types/privmsg.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Extracts a plain object only containing the fields defined by the
-									<a href="../globals.html#privmsguserstate">PrivmsgUserState</a> interface.</p>
+									<a href="../modules.html#privmsguserstate">PrivmsgUserState</a> interface.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#privmsguserstate" class="tsd-signature-type">PrivmsgUserState</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules.html#privmsguserstate" class="tsd-signature-type" data-tsd-kind="Type alias">PrivmsgUserState</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -549,7 +547,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/robotty/dank-twitch-irc/blob/5c732bd/lib/message/twitch-types/privmsg.ts#L169">lib/message/twitch-types/privmsg.ts:169</a></li>
+									<li>Defined in <a href="https://github.com/Amazeful/dank-twitch-irc/blob/99873f9/lib/message/twitch-types/privmsg.ts#L172">lib/message/twitch-types/privmsg.ts:172</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">CheerPrivmsgMessage</span></h4>
@@ -561,8 +559,8 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>dank-twitch-irc</title>
-	<meta name="description" content="Documentation for dank-twitch-irc">
+	<title>@aidenhadisi/dank-twitch-irc</title>
+	<meta name="description" content="Documentation for @aidenhadisi/dank-twitch-irc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">dank-twitch-irc</a>
+					<a href="index.html" class="title">@aidenhadisi/dank-twitch-irc</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -49,12 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>dank-twitch-irc</h1>
+			<h1>@aidenhadisi/dank-twitch-irc</h1>
 		</div>
 	</div>
 </header>
@@ -65,794 +61,15 @@
 				<a href="#dank-twitch-irc" id="dank-twitch-irc" style="color: inherit; text-decoration: none;">
 					<h1>dank-twitch-irc</h1>
 				</a>
-				<p><img src="https://github.com/robotty/dank-twitch-irc/workflows/Build/badge.svg" alt="Build"></p>
-				<p>Node.js-only Twitch IRC lib, written in TypeScript.</p>
-				<p>Requires Node.js 10 (LTS) or above.</p>
-				<ul>
-					<li><a href="https://github.com/robotty/dank-twitch-irc">View on GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/dank-twitch-irc">View on npm</a></li>
-					<li><a href="https://robotty.github.io/dank-twitch-irc/">View documentation</a></li>
-				</ul>
-				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
-					<h2>Table of Contents</h2>
-				</a>
-				<ul>
-					<li><a href="#usage">Usage</a></li>
-					<li><a href="#available-client-events">Available client events</a></li>
-					<li><a href="#handling-usernotice-messages">Handling <code>USERNOTICE</code> messages</a><ul>
-							<li><a href="#sub-and-resub">Sub and resub</a></li>
-							<li><a href="#incoming-raids">Incoming raids</a></li>
-							<li><a href="#subgift">Subgift</a></li>
-							<li><a href="#anonsubgift">Anonsubgift</a></li>
-							<li><a href="#anongiftpaidupgrade-giftpaidupgrade">anongiftpaidupgrade, giftpaidupgrade</a></li>
-							<li><a href="#ritual">ritual</a></li>
-							<li><a href="#bitsbadgetier">bitsbadgetier</a></li>
-						</ul>
-					</li>
-					<li><a href="#chatclient-api">ChatClient API</a></li>
-					<li><a href="#api-documentation">API Documentation</a></li>
-					<li><a href="#client-options">Client options</a></li>
-					<li><a href="#features">Features</a></li>
-					<li><a href="#extra-mixins">Extra Mixins</a></li>
-					<li><a href="#tests">Tests</a></li>
-					<li><a href="#lint-and-check-code-style">Lint and check code style</a></li>
-				</ul>
-				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { ChatClient } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;dank-twitch-irc&quot;</span>);
-
-<span class="hljs-keyword">let</span> client = <span class="hljs-keyword">new</span> ChatClient();
-
-client.on(<span class="hljs-string">&quot;ready&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Successfully connected to chat&quot;</span>));
-client.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (error != <span class="hljs-literal">null</span>) {
-    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&quot;Client closed due to error&quot;</span>, error);
-  }
-});
-
-client.on(<span class="hljs-string">&quot;PRIVMSG&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`[#<span class="hljs-subst">${msg.channelName}</span>] <span class="hljs-subst">${msg.displayName}</span>: <span class="hljs-subst">${msg.messageText}</span>`</span>);
-});
-
-<span class="hljs-comment">// See below for more events</span>
-
-client.connect();
-client.join(<span class="hljs-string">&quot;forsen&quot;</span>);</code></pre>
-				<a href="#available-client-events" id="available-client-events" style="color: inherit; text-decoration: none;">
-					<h2>Available client events</h2>
-				</a>
-				<ul>
-					<li><p><strong><code>client.on(&quot;connecting&quot;, () =&gt; { /* ... */ })</code></strong>: Called when the client
-						starts connecting for the first time.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;connect&quot;, () =&gt; { /* ... */ })</code></strong>: Called when the client
-							connects for the first time. This is called when the transport layer
-							connections (e.g. TCP or WebSocket connection is established), not when login
-						to IRC succeeds.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;ready&quot;, () =&gt; { /* ... */ })</code></strong>: Called when the client becomes
-						ready for the first time (login to the chat server is successful.)</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;close&quot;, (error?: Error) =&gt; { /* ... */ })</code></strong>: Called when the
-							client is terminated as a whole. Not called for individual connections that
-							were disconnected. Can be caused for example by a invalid OAuth token (failure
-							to login), or when <code>client.close()</code> or <code>client.destroy()</code> was called. <code>error</code>
-						is only non-null if the client was closed by a call to <code>client.close()</code>.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;error&quot;, (error: Error?) =&gt; { /* ... */ })</code></strong>: Called when any
-							error occurs on the client, including non-fatal errors such as a message that
-						could not be delivered due to an error.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;rawCommand&quot;, (cmd: string) =&gt; { /* ... */ })</code></strong>: Called when any
-						command is executed by the client.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;message&quot;, (message: IRCMessage) =&gt; { /* ... */ })</code></strong>: Called on
-							every incoming message. If the message is a message that is further parsed (I
-							called these &quot;twitch messages&quot; in this library) then the <code>message</code> passed to
-							this handler will already be the specific type, e.g. <code>PrivmsgMessage</code> if the
-						command is <code>PRIVMSG</code>.</p>
-					</li>
-					<li><p><strong><code>client.on(&quot;PRIVMSG&quot;, (message: PrivmsgMessage) =&gt; { /* ... */ })</code></strong>: Called
-							on incoming messages whose command is <code>PRIVMSG</code>. The <code>message</code> parameter is
-							always instanceof <code>PrivmsgMessage</code>. (See the API documentation for what
-						properties exist on all <code>PrivmsgMessage</code> instances)</p>
-						<p>For example:</p>
-						<pre><code class="language-javascript">client.on(<span class="hljs-string">&quot;CLEARCHAT&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (msg.isTimeout()) {
-    <span class="hljs-built_in">console</span>.log(
-      <span class="hljs-string">`<span class="hljs-subst">${msg.targetUsername}</span> just got timed out for `</span> +
-        <span class="hljs-string">`<span class="hljs-subst">${msg.banDuration}</span> seconds in channel <span class="hljs-subst">${msg.channelName}</span>`</span>
-    );
-  }
-});</code></pre>
-						<p>Other message types that have specific message parsing are:</p>
-						<ul>
-							<li><strong><code>CLEARCHAT</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/clearchatmessage.html"><code>ClearchatMessage</code></a>) - Timeout and ban
-							messages</li>
-							<li><strong><code>CLEARMSG</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/clearmsgmessage.html"><code>ClearmsgMessage</code></a>) - Single message
-							deletions (initiated by <code>/delete</code>)</li>
-							<li><strong><code>HOSTTARGET</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/hosttargetmessage.html"><code>HosttargetMessage</code></a>) - A channel
-							entering or exiting host mode.</li>
-							<li><strong><code>NOTICE</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/noticemessage.html"><code>NoticeMessage</code></a>) - Various notices, such as
-								when you <code>/help</code>, a command fails, the error response when you are timed
-							out, etc.</li>
-							<li><strong><code>PRIVMSG</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/privmsgmessage.html"><code>PrivmsgMessage</code></a>) - Normal chat messages</li>
-							<li><strong><code>ROOMSTATE</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/roomstatemessage.html"><code>RoomstateMessage</code></a>) - A change to a
-								channel&#39;s followers mode, subscribers-only mode, r9k mode, followers mode,
-							slow mode etc.</li>
-							<li><strong><code>USERNOTICE</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/usernoticemessage.html"><code>UsernoticeMessage</code></a>) - Subs, resubs,
-								sub gifts, rituals, raids, etc. - See more details about how to handle this
-							message type below.</li>
-							<li><strong><code>USERSTATE</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/userstatemessage.html"><code>UserstateMessage</code></a>) - Your own state
-								(e.g. badges, color, display name, emote sets, mod status), sent on every
-							time you join a channel or send a <code>PRIVMSG</code> to a channel</li>
-							<li><strong><code>GLOBALUSERSTATE</code></strong> (maps to
-								<a href="https://robotty.github.io/dank-twitch-irc/classes/globaluserstatemessage.html"><code>GlobaluserstateMessage</code></a>) - Logged in user&#39;s &quot;global
-								state&quot;, sent once on every login (Note that due to the used connection pool
-							you can receive this multiple times during your bot&#39;s runtime)</li>
-							<li><strong><code>WHISPER</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/whispermessage.html"><code>WhisperMessage</code></a>) - Somebody else
-							whispering you</li>
-							<li><strong><code>JOIN</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/joinmessage.html"><code>JoinMessage</code></a>) - You yourself joining a channel,
-								of if you have <code>requestMembershipCapability</code> enabled, also other users
-							joining channels you are joined to.</li>
-							<li><strong><code>PART</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/partmessage.html"><code>JoinMessage</code></a>) - You yourself parting (leaving)
-								a channel, of if you have <code>requestMembershipCapability</code> enabled, also other
-							users parting channels you are joined to.</li>
-							<li><strong><code>RECONNECT</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/reconnectmessage.html"><code>ReconnectMessage</code></a>) - When the twitch
-								server tells a client to reconnect and re-join channels (You don&#39;t have to
-							listen for this yourself, this is done automatically already)</li>
-							<li><strong><code>PING</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/pingmessage.html"><code>PingMessage</code></a>) - When the twitch server sends a
-								ping, expecting a pong back from the client to verify if the connection is
-								still alive. (You don&#39;t have to listen for this yourself, the client
-							automatically responds for you)</li>
-							<li><strong><code>PONG</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/pongmessage.html"><code>PongMessage</code></a>) - When the twitch server responds
-								to our <code>PING</code> requests (The library automatically sends a <code>PING</code> request
-							every 30 seconds to verify connections are alive)</li>
-							<li><strong><code>CAP</code></strong> (maps to <a href="https://robotty.github.io/dank-twitch-irc/classes/capmessage.html"><code>CapMessage</code></a>) - Message type received once during
-							connection startup, acknowledging requested capabilities.</li>
-						</ul>
-					</li>
-				</ul>
-				<p>All other commands (if they don&#39;t have a special parsed type like the ones
-					listed above) will still be emitted under their command name as an
-				<a href="https://robotty.github.io/dank-twitch-irc/classes/ircmessage.html"><code>IRCMessage</code></a>, e.g.:</p>
-				<pre><code class="language-javascript"><span class="hljs-comment">// :tmi.twitch.tv 372 botfactory :You are in a maze of twisty passages, all alike.</span>
-<span class="hljs-comment">// msg will be an instance of IRCMessage</span>
-client.on(<span class="hljs-string">&quot;372&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span>
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server MOTD is: <span class="hljs-subst">${msg.ircParameters[<span class="hljs-number">1</span>]}</span>`</span>)
-);</code></pre>
-				<a href="#handling-usernotice-messages" id="handling-usernotice-messages" style="color: inherit; text-decoration: none;">
-					<h2>Handling <code>USERNOTICE</code> messages</h2>
-				</a>
-				<p>The <code>USERNOTICE</code> message type is special because it encapsulates a wide range of
-				events, including:</p>
-				<ul>
-					<li>Subs</li>
-					<li>Resubs</li>
-					<li>Gift subscription</li>
-					<li>Incoming raid and</li>
-					<li>Channel rituals,</li>
-				</ul>
-				<p>which are all emitted under the <code>USERNOTICE</code> event. See also
-					<a href="https://dev.twitch.tv/docs/irc/tags/#usernotice-twitch-tags">the offical documentation</a>
-				about the <code>USERNOTICE</code> command.</p>
-				<p>Every <code>USERNOTICE</code> message is sent by a user, and always contains a
-					<code>msg.systemMessage</code> (This is a message that twitch formats for you, e.g.
-					<code>4 raiders from PotehtoO have joined!</code> for a <code>raid</code> message.) Additionally,
-					every <code>USERNOTICE</code> message can have a message that is additionally sent/shared
-					from the sending user, for example the &quot;share this message with the streamer&quot;
-					message sent with resubs and subs. If no message is sent by the user,
-				<code>msg.messageText</code> is <code>undefined</code>.</p>
-				<p><code>dank-twitch-irc</code> currently does not have special parsing code for each
-					<code>USERNOTICE</code> <code>messageTypeID</code> (e.g. <code>sub</code>, <code>resub</code>, <code>raid</code>, etc...) - Instead the
-					parser assigns all <code>msg-param-</code> tags to the <code>msg.eventParams</code> object. See below
-				on what <code>msg.eventParams</code> are available for each of the <code>messageTypeID</code>s.</p>
-				<a href="#sub-and-resub" id="sub-and-resub" style="color: inherit; text-decoration: none;">
-					<h3>Sub and resub</h3>
-				</a>
-				<p>When a user subscribes or resubscribes with his own money/prime (this is NOT
-				sent for gift subs, see below)</p>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-comment">// sub and resub messages have the same parameters, so we can handle them both the same way</span>
-  <span class="hljs-keyword">if</span> (!msg.isSub() &amp;&amp; !msg.isResub()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   *
-   * {
-   *   &quot;cumulativeMonths&quot;: 10,
-   *   &quot;cumulativeMonthsRaw&quot;: &quot;10&quot;,
-   *   &quot;subPlan&quot;: &quot;1000&quot;, // Prime, 1000, 2000 or 3000
-   *   &quot;subPlanName&quot;: &quot;The Ninjas&quot;,
-   *
-   *   // if shouldShareStreak is false, then
-   *   // streakMonths/streakMonthsRaw will be 0
-   *   // (the user did not share their sub streak in chat)
-   *   &quot;shouldShareStreak&quot;: true,
-   *   &quot;streakMonths&quot;: 7,
-   *   &quot;streakMonthsRaw&quot;: &quot;7&quot;
-   * }
-   * Sender user of the USERNOTICE message is the user subbing/resubbing.
-   */</span>
-
-  <span class="hljs-keyword">if</span> (msg.isSub()) {
-    <span class="hljs-comment">// Leppunen just subscribed to ninja with a tier 1000 (The Ninjas) sub for the first time!</span>
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName +
-        <span class="hljs-string">&quot; just subscribed to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot; with a tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams.subPlanName +
-        <span class="hljs-string">&quot;) sub for the first time!&quot;</span>
-    );
-  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (msg.isResub()) {
-    <span class="hljs-keyword">let</span> streakMessage = <span class="hljs-string">&quot;&quot;</span>;
-    <span class="hljs-keyword">if</span> (msg.eventParams.shouldShareStreak) {
-      streakMessage =
-        <span class="hljs-string">&quot;, currently &quot;</span> + msg.eventParams.streakMonths + <span class="hljs-string">&quot; months in a row&quot;</span>;
-    }
-
-    <span class="hljs-comment">// Leppunen just resubscribed to ninja with a tier 1000 (The Ninjas) sub!</span>
-    <span class="hljs-comment">// They are resubscribing for 10 months, currently 7 months in a row!</span>
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName +
-        <span class="hljs-string">&quot; just resubscribed to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot; with a tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams.subPlanName +
-        <span class="hljs-string">&quot;) sub! They are resubscribing for &quot;</span> +
-        msg.eventParams.cumulativeMonths +
-        <span class="hljs-string">&quot; months&quot;</span> +
-        streakMessage +
-        <span class="hljs-string">&quot;!&quot;</span>
-    );
-  }
-
-  <span class="hljs-keyword">if</span> (msg.messageText != <span class="hljs-literal">null</span>) {
-    <span class="hljs-comment">// you also have access to lots of other properties also present on PRIVMSG messages,</span>
-    <span class="hljs-comment">// such as msg.badges, msg.senderUsername, msg.badgeInfo, msg.bits/msg.isCheer(),</span>
-    <span class="hljs-comment">// msg.color, msg.emotes, msg.messageID, msg.serverTimestamp, etc...</span>
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName +
-        <span class="hljs-string">&quot; shared the following message with the streamer: &quot;</span> +
-        msg.messageText
-    );
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;They did not share a message with the streamer.&quot;</span>);
-  }
-});</code></pre>
-				<a href="#incoming-raids" id="incoming-raids" style="color: inherit; text-decoration: none;">
-					<h3>Incoming raids</h3>
-				</a>
-				<p>Twitch says:</p>
-				<blockquote>
-					<p>Incoming raid to a channel. Raid is a Twitch tool that allows broadcasters to
-						send their viewers to another channel, to help support and grow other members
-					in the community.)</p>
-				</blockquote>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isRaid()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * {
-   *   &quot;displayName&quot;: &quot;Leppunen&quot;,
-   *   &quot;login&quot;: &quot;leppunen&quot;,
-   *   &quot;viewerCount&quot;: 12,
-   *   &quot;viewerCountRaw&quot;: &quot;12&quot;
-   * }
-   * Sender user of the USERNOTICE message is the user raiding this channel.
-   * Note that the display name and login present in msg.eventParams are
-   * the same as msg.displayName and msg.senderUsername, so it doesn&#x27;t matter
-   * which one you use (although I recommend the properties directly on the
-   * message object, not in eventParams)
-   */</span>
-
-  <span class="hljs-comment">// source user is the channel/streamer raiding</span>
-  <span class="hljs-comment">// Leppunen just raided Supinic with 12 viewers!</span>
-  <span class="hljs-built_in">console</span>.log(
-    msg.displayName +
-      <span class="hljs-string">&quot; just raided &quot;</span> +
-      msg.channelName +
-      <span class="hljs-string">&quot; with &quot;</span> +
-      msg.eventParams.viewerCount +
-      <span class="hljs-string">&quot; viewers!&quot;</span>
-  );
-});</code></pre>
-				<a href="#subgift" id="subgift" style="color: inherit; text-decoration: none;">
-					<h3>Subgift</h3>
-				</a>
-				<p>When a user gifts somebody else a subscription.</p>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isSubgift()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * {
-   *   &quot;months&quot;: 5,
-   *   &quot;monthsRaw&quot;: &quot;5&quot;,
-   *   &quot;giftMonths&quot;: 5,
-   *   &quot;giftMonthsRaw&quot;: &quot;5&quot;,
-   *   &quot;recipientDisplayName&quot;: &quot;Leppunen&quot;,
-   *   &quot;recipientID&quot;: &quot;42239452&quot;,
-   *   &quot;recipientUsername&quot;: &quot;leppunen&quot;,
-   *   &quot;subPlan&quot;: &quot;1000&quot;,
-   *   &quot;subPlanName&quot;: &quot;The Ninjas&quot;,
-   *   &quot;senderCount&quot;: 5,
-   *   &quot;senderCountRaw&quot;: &quot;5&quot;,
-   * }
-   * Sender user of the USERNOTICE message is the user gifting the subscription.
-   */</span>
-
-  <span class="hljs-keyword">if</span> (msg.eventParams.months === <span class="hljs-number">1</span>) {
-    <span class="hljs-comment">// Leppunen just gifted NymN a fresh tier 1000 (The Ninjas) sub to ninja!</span>
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName +
-        <span class="hljs-string">&quot; just gifted &quot;</span> +
-        msg.eventParams.recipientDisplayName +
-        <span class="hljs-string">&quot; a fresh tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams +
-        <span class="hljs-string">&quot;) sub to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot;!&quot;</span>
-    );
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// Leppunen just gifted NymN a tier 1000 (The Ninjas) resub to ninja, that&#x27;s 7 months in a row!</span>
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName +
-        <span class="hljs-string">&quot; just gifted &quot;</span> +
-        msg.eventParams.recipientDisplayName +
-        <span class="hljs-string">&quot; a tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams +
-        <span class="hljs-string">&quot;) resub to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot;, that&#x27;s &quot;</span> +
-        msg.eventParams.months +
-        <span class="hljs-string">&quot; in a row!&quot;</span>
-    );
-  }
-
-  <span class="hljs-comment">// note: if the subgift was from an anonymous user, the sender user for the USERNOTICE message will be</span>
-  <span class="hljs-comment">// AnAnonymousGifter (user ID 274598607)</span>
-  <span class="hljs-keyword">if</span> (msg.senderUserID === <span class="hljs-string">&quot;274598607&quot;</span>) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;That (re)sub was gifted anonymously!&quot;</span>);
-  }
-});</code></pre>
-				<a href="#anonsubgift" id="anonsubgift" style="color: inherit; text-decoration: none;">
-					<h3>Anonsubgift</h3>
-				</a>
-				<p>When an anonymous user gifts a subscription to a viewer.</p>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isAnonSubgift()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * {
-   *   &quot;months&quot;: 5,
-   *   &quot;monthsRaw&quot;: &quot;5&quot;,
-   *   &quot;recipientDisplayName&quot;: &quot;Leppunen&quot;,
-   *   &quot;recipientID&quot;: &quot;42239452&quot;,
-   *   &quot;recipientUsername&quot;: &quot;leppunen&quot;,
-   *   &quot;subPlan&quot;: &quot;1000&quot;,
-   *   &quot;subPlanName&quot;: &quot;The Ninjas&quot;
-   * }
-   *
-   * WARNING! Sender user of the USERNOTICE message is the broadcaster (e.g. Ninja
-   * in the example below)
-   */</span>
-
-  <span class="hljs-keyword">if</span> (msg.eventParams.months === <span class="hljs-number">1</span>) {
-    <span class="hljs-comment">// An anonymous gifter just gifted NymN a fresh tier 1000 (The Ninjas) sub to ninja!</span>
-    <span class="hljs-built_in">console</span>.log(
-      <span class="hljs-string">&quot;An anonymous gifter just gifted &quot;</span> +
-        msg.eventParams.recipientDisplayName +
-        <span class="hljs-string">&quot; a fresh tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams +
-        <span class="hljs-string">&quot;) sub to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot;!&quot;</span>
-    );
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// An anonymous gifter just gifted NymN a tier 1000 (The Ninjas) resub to ninja, that&#x27;s 7 months in a row!</span>
-    <span class="hljs-built_in">console</span>.log(
-      <span class="hljs-string">&quot;An anonymous gifter just gifted &quot;</span> +
-        msg.eventParams.recipientDisplayName +
-        <span class="hljs-string">&quot; a tier &quot;</span> +
-        msg.eventParams.subPlan +
-        <span class="hljs-string">&quot; (&quot;</span> +
-        msg.eventParams +
-        <span class="hljs-string">&quot;) resub to &quot;</span> +
-        msg.channelName +
-        <span class="hljs-string">&quot;, that&#x27;s &quot;</span> +
-        msg.eventParams.months +
-        <span class="hljs-string">&quot; in a row!&quot;</span>
-    );
-  }
-});</code></pre>
-				<a href="#anongiftpaidupgrade-giftpaidupgrade" id="anongiftpaidupgrade-giftpaidupgrade" style="color: inherit; text-decoration: none;">
-					<h3>anongiftpaidupgrade, giftpaidupgrade</h3>
-				</a>
-				<p>When a user commits to continue the gift sub by another user (or an anonymous
-				gifter).</p>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isAnonGiftPaidUpgrade()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * EITHER: (ONLY when a promotion is running!)
-   * {
-   *   &quot;promoName&quot;: &quot;Subtember 2018&quot;,
-   *   &quot;promoGiftTotal&quot;: 3987234,
-   *   &quot;promoGiftTotalRaw&quot;: &quot;3987234&quot;
-   * }
-   * OR: (when no promotion is running)
-   * {}
-   *
-   * Sender user of the USERNOTICE message is the user continuing their sub.
-   */</span>
-
-  <span class="hljs-comment">// Leppunen is continuing their ninja gift sub they got from an anonymous user!</span>
-  <span class="hljs-built_in">console</span>.log(
-    msg.displayName +
-      <span class="hljs-string">&quot; is continuing their &quot;</span> +
-      msg.channelName +
-      <span class="hljs-string">&quot; gift sub they got from an anonymous user!&quot;</span>
-  );
-});</code></pre>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isGiftPaidUpgrade()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * EITHER: (ONLY when a promotion is running!)
-   * {
-   *   &quot;promoName&quot;: &quot;Subtember 2018&quot;,
-   *   &quot;promoGiftTotal&quot;: 3987234,
-   *   &quot;promoGiftTotalRaw&quot;: &quot;3987234&quot;,
-   *   &quot;senderLogin&quot;: &quot;krakenbul&quot;,
-   *   &quot;senderName&quot;: &quot;Krakenbul&quot;
-   * }
-   * OR: (when no promotion is running)
-   * {
-   *   &quot;senderLogin&quot;: &quot;krakenbul&quot;,
-   *   &quot;senderName&quot;: &quot;Krakenbul&quot;
-   * }
-   *
-   * Sender user of the USERNOTICE message is the user continuing their sub.
-   */</span>
-
-  <span class="hljs-comment">// Leppunen is continuing their ninja gift sub they got from Krakenbul!</span>
-  <span class="hljs-built_in">console</span>.log(
-    msg.displayName +
-      <span class="hljs-string">&quot; is continuing their &quot;</span> +
-      msg.channelName +
-      <span class="hljs-string">&quot; gift sub they got from &quot;</span> +
-      msg.msgParam.senderName +
-      <span class="hljs-string">&quot;!&quot;</span>
-  );
-});</code></pre>
-				<a href="#ritual" id="ritual" style="color: inherit; text-decoration: none;">
-					<h3>ritual</h3>
-				</a>
-				<p>Channel ritual. Twitch says:</p>
-				<blockquote>
-					<p>Channel <em>ritual</em>. Many channels have special rituals to celebrate viewer
-						milestones when they are shared. The rituals notice extends the sharing of
-						these messages to other viewer milestones (initially, a new viewer chatting
-					for the first time).</p>
-				</blockquote>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isRitual()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * {
-   *   &quot;ritualName&quot;: &quot;new_chatter&quot;
-   * }
-   *
-   * Sender user of the USERNOTICE message is the user performing the
-   * ritual (e.g. the new chatter).
-   */</span>
-
-  <span class="hljs-comment">// Leppunen is new to ninja&#x27;s chat! Say hello!</span>
-  <span class="hljs-keyword">if</span> (msg.eventParams.ritualName === <span class="hljs-string">&quot;new_chatter&quot;</span>) {
-    <span class="hljs-built_in">console</span>.log(
-      msg.displayName + <span class="hljs-string">&quot; is new to &quot;</span> + msg.channelName + <span class="hljs-string">&quot;&#x27;s chat! Say hello!&quot;</span>
-    );
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-built_in">console</span>.warn(
-      <span class="hljs-string">&quot;Unknown (unhandled) ritual type: &quot;</span> + msg.eventParams.ritualName
-    );
-  }
-});</code></pre>
-				<a href="#bitsbadgetier" id="bitsbadgetier" style="color: inherit; text-decoration: none;">
-					<h3>bitsbadgetier</h3>
-				</a>
-				<p>When a user cheers and earns himself a new bits badge with that cheer (e.g. they
-					just cheered more than/exactly 10000 bits in total, and just earned themselves
-				the 10k bits badge)</p>
-				<pre><code class="language-javascript">chatClient.on(<span class="hljs-string">&quot;USERNOTICE&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (!msg.isBitsBadgeTier()) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  <span class="hljs-comment">/*
-   * msg.eventParams are:
-   * {
-   *   &quot;threshold&quot;: 10000,
-   *   &quot;thresholdRaw&quot;: &quot;10000&quot;,
-   * }
-   *
-   * Sender user of the USERNOTICE message is the user cheering the bits.
-   */</span>
-
-  <span class="hljs-comment">// Leppunen just earned themselves the 10000 bits badge in ninja&#x27;s channel!</span>
-  <span class="hljs-built_in">console</span>.log(
-    msg.displayName +
-      <span class="hljs-string">&quot; just earned themselves the &quot;</span> +
-      msg.threshold +
-      <span class="hljs-string">&quot; bits badge in &quot;</span> +
-      msg.channelName +
-      <span class="hljs-string">&quot;&#x27;s channel!&quot;</span>
-  );
-});</code></pre>
-				<a href="#chatclient-api" id="chatclient-api" style="color: inherit; text-decoration: none;">
-					<h2>ChatClient API</h2>
-				</a>
-				<p>You probably will want to use these functions on <code>ChatClient</code> most frequently:</p>
-				<ul>
-					<li><code>client.join(channelName: string): Promise&lt;void&gt;</code> - Join (Listen to) the
-					channel given by the channel name</li>
-					<li><code>client.joinAll(channelNames: string[]): Promise&lt;void&gt;</code> - Join (Listen to) all
-					of the listed channels at once (bulk join)</li>
-					<li><code>client.part(channelName: string): Promise&lt;void&gt;</code> - Part (Leave/Unlisten) the
-					channel given by the channel name</li>
-					<li><code>client.privmsg(channelName: string, message: string): Promise&lt;void&gt;</code> - Send a
-						raw <code>PRIVMSG</code> to the given channel. You can issue chat commands with this
-						function, e.g. <code>client.privmsg(&quot;forsen&quot;, &quot;/timeout weeb123 5&quot;)</code> or normal
-					messages, e.g. <code>client.privmsg(&quot;forsen&quot;, &quot;Kappa Keepo PogChamp&quot;)</code>.</li>
-					<li><code>client.say(channelName: string, message: string): Promise&lt;void&gt;</code> - Say a
-						normal chat message in the given channel. If a command is given as <code>message</code>,
-					it will be escaped.</li>
-					<li><code>client.me(channelName: string, message: string): Promise&lt;void&gt;</code> - Post a
-					<code>/me</code> message in the given channel.</li>
-					<li><code>client.timeout(channelName: string, username: string, length: number, reason?: string): Promise&lt;void&gt;</code> -
-						Timeout <code>username</code> for <code>length</code> seconds in <code>channelName</code>. Optionally accepts a
-					reason to set.</li>
-					<li><code>client.ban(channelName: string, username: string, reason?: string): Promise&lt;void&gt;</code> -
-					Ban <code>username</code> in <code>channelName</code>. Optionally accepts a reason to set.</li>
-					<li><code>client.ping()</code> - Send a <code>PING</code> on a connection from the pool, and awaits the
-					<code>PONG</code> response. You can use this to measure server latency, for example.</li>
-					<li><code>client.whisper(username: string, message: string)</code> - Send the user a whisper
-					from the bot.</li>
-					<li><code>client.setColor(color: Color)</code> - set the username color of your bot account.
-					E.g. <code>client.setColor({ r: 255, g: 0, b: 127 })</code>.</li>
-					<li><code>client.getMods(channelName: string)</code> and <code>client.getVips(channelName: string)</code> -
-						Get a list of moderators/VIPs in a channel. Returns
-						a promise that resolves to an array of strings (login names of the moderators/VIPs).
-						Note that due to Twitch&#39;s restrictions, this function cannot be used with anonymous chat clients.
-					(The request will time out if your chat client is logged in as anonymous.)</li>
-				</ul>
-				<p>Extra functionality:</p>
-				<ul>
-					<li><code>client.sendRaw(command: string): void</code> - Send a raw IRC command to a
-					connection in the connection pool.</li>
-					<li><code>client.unconnected (boolean)</code> - Returns whether the client is unconnected.</li>
-					<li><code>client.connecting (boolean)</code> - Returns whether the client is connecting.</li>
-					<li><code>client.connected (boolean)</code> - Returns whether the client is connected
-					(Transport layer is connected).</li>
-					<li><code>client.ready (boolean)</code> - Returns whether the client is ready (Logged into
-					IRC server).</li>
-					<li><code>client.closed (boolean)</code> - Returns whether the client is closed.</li>
-				</ul>
-				<p>Note that channel names in the above functions always refer to the &quot;login name&quot;
-					of a twitch channel. Channel names may not be capitalized, e.g. <code>Forsen</code> would
-					be invalid, but <code>forsen</code> not. This library also does not accept the leading <code>#</code>
-					character and never returns it on any message objects (e.g. <code>msg.channelName</code>
-				would be <code>forsen</code>, not <code>#forsen</code>).</p>
-				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
-					<h2>API Documentation</h2>
-				</a>
-				<p>Generated API documentation can be found here:
-				<a href="https://robotty.github.io/dank-twitch-irc">https://robotty.github.io/dank-twitch-irc</a></p>
-				<a href="#client-options" id="client-options" style="color: inherit; text-decoration: none;">
-					<h2>Client options</h2>
-				</a>
-				<p>Pass options to the <code>ChatClient</code> constructor. More available options are
-				documented in the Below are all possible options and their default values:</p>
-				<p><strong>Note! ALL of these configuration options are <em>optional</em>!</strong> I highly recommend you
-				only set the very config options you need, the rest are usually at a reasonable default.<br>For most bots, you only need to set <code>username</code> and <code>password</code>:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">let</span> client = <span class="hljs-keyword">new</span> ChatClient({
-  <span class="hljs-attr">username</span>: <span class="hljs-string">&quot;your-bot-username&quot;</span>,
-  <span class="hljs-attr">password</span>: <span class="hljs-string">&quot;0123456789abcdef1234567&quot;</span>,
-});</code></pre>
-				<p>Nevertheless, here are examples of all possible config options:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">let</span> client = <span class="hljs-keyword">new</span> ChatClient({
-  <span class="hljs-attr">username</span>: <span class="hljs-string">&quot;your-bot-username&quot;</span>, <span class="hljs-comment">// justinfan12345 by default - For anonymous chat connection</span>
-  <span class="hljs-attr">password</span>: <span class="hljs-string">&quot;0123456789abcdef1234567&quot;</span>, <span class="hljs-comment">// undefined by default (no password)</span>
-
-  <span class="hljs-comment">// Message rate limits configuration for verified and known bots</span>
-  <span class="hljs-comment">// pick one of the presets or configure custom rates as shown below:</span>
-  <span class="hljs-attr">rateLimits</span>: <span class="hljs-string">&quot;default&quot;</span>,
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">rateLimits</span>: <span class="hljs-string">&quot;knownBot&quot;</span>,
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">rateLimits</span>: <span class="hljs-string">&quot;verifiedBot&quot;</span>,
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">rateLimits</span>: {
-    <span class="hljs-attr">highPrivmsgLimits</span>: <span class="hljs-number">100</span>,
-    <span class="hljs-attr">lowPrivmsgLimits</span>: <span class="hljs-number">20</span>,
-  },
-
-  <span class="hljs-comment">// Configuration options for the backing connections:</span>
-  <span class="hljs-comment">// Plain TCP or TLS</span>
-  <span class="hljs-attr">connection</span>: {
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-comment">// tcp by default</span>
-    <span class="hljs-attr">secure</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// true by default</span>
-    <span class="hljs-comment">// host and port must both be specified at once</span>
-    <span class="hljs-attr">host</span>: <span class="hljs-string">&quot;custom-chat-server.com&quot;</span>, <span class="hljs-comment">// irc.chat.twitch.tv by default</span>
-    <span class="hljs-attr">port</span>: <span class="hljs-number">1234</span>, <span class="hljs-comment">// 6697/6667 by default, depending on the &quot;secure&quot; setting</span>
-  },
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">connection</span>: {
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;websocket&quot;</span>,
-    <span class="hljs-attr">secure</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// use preset URL of irc-ws.chat.twitch.tv</span>
-  },
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">connection</span>: {
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;websocket&quot;</span>,
-    <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;wss://custom-url.com/abc/def&quot;</span>, <span class="hljs-comment">// custom URL</span>
-  },
-  <span class="hljs-comment">// or:</span>
-  <span class="hljs-attr">connection</span>: {
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;duplex&quot;</span>,
-    <span class="hljs-attr">stream</span>: <span class="hljs-function">() =&gt;</span> aNodeJsDuplexInstance, <span class="hljs-comment">// read and write to a custom object</span>
-    <span class="hljs-comment">// implementing the Duplex interface from Node.js</span>
-    <span class="hljs-comment">// the function you specify is called for each new connection</span>
-
-    <span class="hljs-attr">preSetup</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// false by default, makes the lib skip login</span>
-    <span class="hljs-comment">// and capabilities negotiation on connection startup</span>
-  },
-
-  <span class="hljs-comment">// how many channels each individual connection should join at max</span>
-  <span class="hljs-attr">maxChannelCountPerConnection</span>: <span class="hljs-number">100</span>, <span class="hljs-comment">// 90 by default</span>
-
-  <span class="hljs-comment">// custom parameters for connection rate limiting</span>
-  <span class="hljs-attr">connectionRateLimits</span>: {
-    <span class="hljs-attr">parallelConnections</span>: <span class="hljs-number">5</span>, <span class="hljs-comment">// 1 by default</span>
-    <span class="hljs-comment">// time to wait after each connection before a new connection can begin</span>
-    <span class="hljs-attr">releaseTime</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// in milliseconds, 2 seconds by default</span>
-  },
-
-  <span class="hljs-comment">// I recommend you leave this off by default, it makes your bot faster</span>
-  <span class="hljs-comment">// If you need live update of who&#x27;s joining and leaving chat,</span>
-  <span class="hljs-comment">// poll the tmi.twitch.tv chatters endpoint instead since it</span>
-  <span class="hljs-comment">// is also more reliable</span>
-  <span class="hljs-attr">requestMembershipCapability</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// false by default</span>
-
-  <span class="hljs-comment">// read more about mixins below</span>
-  <span class="hljs-comment">// this disables the connection rate limiter, message rate limiter</span>
-  <span class="hljs-comment">// and Room- and Userstate trackers (which are important for other mixins)</span>
-  <span class="hljs-attr">installDefaultMixins</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// true by default</span>
-
-  <span class="hljs-comment">// Silence UnandledPromiseRejectionWarnings on all client methods</span>
-  <span class="hljs-comment">// that return promises.</span>
-  <span class="hljs-comment">// With this option enabled, the returned promises will still be rejected/</span>
-  <span class="hljs-comment">// resolved as without this option, this option ONLY silences the</span>
-  <span class="hljs-comment">// UnhandledPromiseRejectionWarning.</span>
-  <span class="hljs-attr">ignoreUnhandledPromiseRejections</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// false by default</span>
-});</code></pre>
-				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
-					<h2>Features</h2>
-				</a>
-				<p>This client currently supports the following features:</p>
-				<ul>
-					<li>Connection pooling and round-robin connection usage</li>
-					<li>Automatic rate limiter for connection opening and chat commands</li>
-					<li>All twitch-specific message types parsed (<code>CLEARCHAT</code>, <code>CLEARMSG</code>,
-						<code>GLOBALUSERSTATE</code>, <code>HOSTTARGET</code>, <code>JOIN</code>, <code>NOTICE</code>, <code>PART</code>, <code>PING</code>, <code>PONG</code>,
-						<code>PRIVMSG</code>, <code>RECONNECT</code>, <code>ROOMSTATE</code>, <code>USERNOTICE</code>, <code>USERSTATE</code>, <code>WHISPER</code>,
-					<code>CAP</code>)</li>
-					<li>Accurate response to server responses (e.g. error thrown if you are banned
-					from channel/channel is suspended/login is invalid etc.)</li>
-					<li>Bulk join functionality to join lots of channels quickly</li>
-					<li>Implements the recommended connection control, utilizing <code>RECONNECT</code>, <code>PING</code>
-					and <code>PONG</code></li>
-					<li>Full tracking of room state (e.g. submode, emote-only mode, followers mode,
-					r9k etc.) and user state (badges, moderator state, color, etc).</li>
-					<li>Most function calls return promises but errors can also be handled by
-					subscribing to the error event</li>
-					<li>Slow-mode rate limiter for non-VIP/moderator bots (waits either the global
-					~1.3 sec/channel-specific slow mode)</li>
-					<li>Support for different types of transport (in-memory, TCP, WebSocket)</li>
-				</ul>
-				<a href="#extra-mixins" id="extra-mixins" style="color: inherit; text-decoration: none;">
-					<h2>Extra Mixins</h2>
-				</a>
-				<p>There are some features you might find useful in your bot that are not necessary
-					for general client/bot operations, so they were packaged as <strong>mixins</strong>. You can
-				activate mixins by calling:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { ChatClient, AlternateMessageModifier } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;dank-twitch-irc&quot;</span>);
-
-<span class="hljs-keyword">let</span> client = <span class="hljs-keyword">new</span> ChatClient();
-
-client.use(<span class="hljs-keyword">new</span> AlternateMessageModifier(client));</code></pre>
-				<p>Available mixins are:</p>
-				<ul>
-					<li><code>new AlternateMessageModifier(client)</code> will allow your bot to send the same
-						message within a 30 seconds period. You must also use <code>client.say</code> and
-					<code>client.me</code> for this mixin to behave consistently and reliably.</li>
-					<li><code>new SlowModeRateLimiter(client, /* optional */ maxWaitingMessages)</code> will rate
-						limit your messages in channels where your bot is not moderator, VIP or
-						broadcaster and has to wait a bit between sending messages. If more than
-						<code>maxWaitingMessages</code> are waiting, the outgoing message will be dropped
-						silently. <code>maxWaitingMessages</code> defaults to 10. Note this mixin only has an
-					effect on <code>client.say</code> and <code>client.me</code> functions, not <code>client.privmsg</code>.</li>
-				</ul>
-				<p>and the mixins installed by default:</p>
-				<ul>
-					<li><code>new PrivmsgMessageRateLimiter(client)</code> - Rate limits outgoing messages
-						according to the rate limits imposed by Twitch. Configure the verified/known
-					status of your bot using the config (see above).</li>
-					<li><code>new ConnectionRateLimiter(client)</code> - Rate limits new connections accoding to
-					the rate limits set in the config.</li>
-					<li><code>new UserStateTracker(client)</code> - Used by other mixins. Keeps track of what
-					state your bot user has in all channels.</li>
-					<li><code>new RoomStateTracker()</code> - Used by other mixins. Keeps track of each channel&#39;s
-					state, e.g. sub-mode etc.</li>
-					<li><code>new IgnoreUnhandledPromiseRejectionsMixin()</code> - Silences
-						<code>UnhandledPromiseRejectionWarning</code>s on promises returned by the client&#39;s
-						functions. (installed for you if you activate the
-					<code>ignoreUnhandledPromiseRejections</code> client option)</li>
-				</ul>
-				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
-					<h2>Tests</h2>
-				</a>
-				<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span></span></code></pre>
-				<p>Test run report is available in <code>./mochawesome-report/mochawesome.html</code>.
-				Coverage report is produced as <code>./coverage/index.html</code>.</p>
-				<a href="#lint-and-check-code-style" id="lint-and-check-code-style" style="color: inherit; text-decoration: none;">
-					<h2>Lint and check code style</h2>
-				</a>
-				<pre><code class="language-bash"><span class="hljs-comment"># Run eslint and tslint rules and checks code style with prettier</span>
-npm run lint</code></pre>
-				<pre><code class="language-bash"><span class="hljs-comment"># Run eslint, tslint and pretter fixers</span>
-npm run lintfix</code></pre>
+				<p>This package is a fork of robotty/dank-twitch-irc. It has been further modifed for AmazefulBot.</p>
+				<p>If you want to use this package, please check out the original repository: <a href="https://github.com/robotty/dank-twitch-irc">https://github.com/robotty/dank-twitch-irc</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -866,9 +83,6 @@ npm run lintfix</code></pre>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/baseclient.html" class="tsd-kind-icon">Base<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/capmessage.html" class="tsd-kind-icon">Cap<wbr>Message</a>
@@ -902,9 +116,6 @@ npm run lintfix</code></pre>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/editabletimeout.html" class="tsd-kind-icon">Editable<wbr>Timeout</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/getuserserror.html" class="tsd-kind-icon">Get<wbr>Users<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/globaluserstatemessage.html" class="tsd-kind-icon">Globaluserstate<wbr>Message</a>
@@ -985,9 +196,6 @@ npm run lintfix</code></pre>
 						<a href="classes/sayerror.html" class="tsd-kind-icon">Say<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/setcolorerror.html" class="tsd-kind-icon">Set<wbr>Color<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/singleconnection.html" class="tsd-kind-icon">Single<wbr>Connection</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -1007,9 +215,6 @@ npm run lintfix</code></pre>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/twitchemote.html" class="tsd-kind-icon">Twitch<wbr>Emote</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/twitchflag.html" class="tsd-kind-icon">Twitch<wbr>Flag</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/userbanerror.html" class="tsd-kind-icon">User<wbr>Ban<wbr>Error</a>
@@ -1043,12 +248,6 @@ npm run lintfix</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/bitsbadgetierparameters.html" class="tsd-kind-icon">Bits<wbr>Badge<wbr>Tier<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/cheerprivmsgmessage.html" class="tsd-kind-icon">Cheer<wbr>Privmsg<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/cheerusernoticemessage.html" class="tsd-kind-icon">Cheer<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/clearchatclearchatmessage.html" class="tsd-kind-icon">Clear<wbr>Chat<wbr>Clearchat<wbr>Message</a>
@@ -1087,12 +286,6 @@ npm run lintfix</code></pre>
 						<a href="interfaces/exitedhostmodehosttargetmessage.html" class="tsd-kind-icon">Exited<wbr>Host<wbr>Mode<wbr>Hosttarget<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/fastspamresult.html" class="tsd-kind-icon">Fast<wbr>Spam<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/getusersconfig.html" class="tsd-kind-icon">Get<wbr>Users<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
 						<a href="interfaces/globaluserstate.html" class="tsd-kind-icon">Global<wbr>User<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -1109,9 +302,6 @@ npm run lintfix</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/ircmessagetags.html" class="tsd-kind-icon">IRCMessage<wbr>Tags</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/lastmessage.html" class="tsd-kind-icon">Last<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/messageratelimits.html" class="tsd-kind-icon">Message<wbr>Rate<wbr>Limits</a>
@@ -1171,496 +361,367 @@ npm run lintfix</code></pre>
 						<a href="interfaces/websockettransportconfiguration.html" class="tsd-kind-icon">Web<wbr>Socket<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#anongiftpaidupgradeparameters" class="tsd-kind-icon">Anon<wbr>Gift<wbr>Paid<wbr>Upgrade<wbr>Parameters</a>
+						<a href="modules.html#anongiftpaidupgradeparameters" class="tsd-kind-icon">Anon<wbr>Gift<wbr>Paid<wbr>Upgrade<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#anongiftpaidupgradeusernoticemessage" class="tsd-kind-icon">Anon<wbr>Gift<wbr>Paid<wbr>Upgrade<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#anongiftpaidupgradeusernoticemessage" class="tsd-kind-icon">Anon<wbr>Gift<wbr>Paid<wbr>Upgrade<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#anonsubgiftparameters" class="tsd-kind-icon">Anon<wbr>Subgift<wbr>Parameters</a>
+						<a href="modules.html#anonsubgiftparameters" class="tsd-kind-icon">Anon<wbr>Subgift<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#anonsubgiftusernoticemessage" class="tsd-kind-icon">Anon<wbr>Subgift<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#anonsubgiftusernoticemessage" class="tsd-kind-icon">Anon<wbr>Subgift<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#basictcptransportconfiguration" class="tsd-kind-icon">Basic<wbr>Tcp<wbr>Transport<wbr>Configuration</a>
+						<a href="modules.html#basictcptransportconfiguration" class="tsd-kind-icon">Basic<wbr>Tcp<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#bitsbadgetierusernoticemessage" class="tsd-kind-icon">Bits<wbr>Badge<wbr>Tier<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#bitsbadgetierusernoticemessage" class="tsd-kind-icon">Bits<wbr>Badge<wbr>Tier<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#clientevents" class="tsd-kind-icon">Client<wbr>Events</a>
+						<a href="modules.html#clientevents" class="tsd-kind-icon">Client<wbr>Events</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#condition" class="tsd-kind-icon">Condition</a>
+						<a href="modules.html#condition" class="tsd-kind-icon">Condition</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#connectionpredicate" class="tsd-kind-icon">Connection<wbr>Predicate</a>
+						<a href="modules.html#connectionpredicate" class="tsd-kind-icon">Connection<wbr>Predicate</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#customratelimitsconfig" class="tsd-kind-icon">Custom<wbr>Rate<wbr>Limits<wbr>Config</a>
+						<a href="modules.html#customratelimitsconfig" class="tsd-kind-icon">Custom<wbr>Rate<wbr>Limits<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#expandedclientconfiguration" class="tsd-kind-icon">Expanded<wbr>Client<wbr>Configuration</a>
+						<a href="modules.html#expandedclientconfiguration" class="tsd-kind-icon">Expanded<wbr>Client<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#expandedduplextransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Duplex<wbr>Transport<wbr>Configuration</a>
+						<a href="modules.html#expandedduplextransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Duplex<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#expandedtcptransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Tcp<wbr>Transport<wbr>Configuration</a>
+						<a href="modules.html#expandedtcptransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Tcp<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#expandedtransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Transport<wbr>Configuration</a>
+						<a href="modules.html#expandedtransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#expandedwebsockettransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Web<wbr>Socket<wbr>Transport<wbr>Configuration</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#fakeclientdata" class="tsd-kind-icon">Fake<wbr>Client<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#fakeconnectiondata" class="tsd-kind-icon">Fake<wbr>Connection<wbr>Data</a>
+						<a href="modules.html#expandedwebsockettransportconfiguration" class="tsd-kind-icon">Expanded<wbr>Web<wbr>Socket<wbr>Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="globals.html#functionat" class="tsd-kind-icon">Function<wbr>At</a>
+						<a href="modules.html#functionat" class="tsd-kind-icon">Function<wbr>At</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="globals.html#functionkeysof" class="tsd-kind-icon">Function<wbr>Keys<wbr>Of</a>
+						<a href="modules.html#functionkeysof" class="tsd-kind-icon">Function<wbr>Keys<wbr>Of</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#giftpaidupgradeparameters" class="tsd-kind-icon">Gift<wbr>Paid<wbr>Upgrade<wbr>Parameters</a>
+						<a href="modules.html#giftpaidupgradeparameters" class="tsd-kind-icon">Gift<wbr>Paid<wbr>Upgrade<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#giftpaidupgradeusernoticemessage" class="tsd-kind-icon">Gift<wbr>Paid<wbr>Upgrade<wbr>Usernotice<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#mocktransportdata" class="tsd-kind-icon">Mock<wbr>Transport<wbr>Data</a>
+						<a href="modules.html#giftpaidupgradeusernoticemessage" class="tsd-kind-icon">Gift<wbr>Paid<wbr>Upgrade<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="globals.html#overridefunction" class="tsd-kind-icon">Override<wbr>Function</a>
+						<a href="modules.html#overridefunction" class="tsd-kind-icon">Override<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="globals.html#overridefunctions" class="tsd-kind-icon">Override<wbr>Functions</a>
+						<a href="modules.html#overridefunctions" class="tsd-kind-icon">Override<wbr>Functions</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#presetkeys" class="tsd-kind-icon">Preset<wbr>Keys</a>
+						<a href="modules.html#presetkeys" class="tsd-kind-icon">Preset<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#privmsguserstate" class="tsd-kind-icon">Privmsg<wbr>User<wbr>State</a>
+						<a href="modules.html#privmsguserstate" class="tsd-kind-icon">Privmsg<wbr>User<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#raidusernoticemessage" class="tsd-kind-icon">Raid<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#raidusernoticemessage" class="tsd-kind-icon">Raid<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#ratelimitsconfig" class="tsd-kind-icon">Rate<wbr>Limits<wbr>Config</a>
+						<a href="modules.html#ratelimitsconfig" class="tsd-kind-icon">Rate<wbr>Limits<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#resubusernoticemessage" class="tsd-kind-icon">Resub<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#resubusernoticemessage" class="tsd-kind-icon">Resub<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#ritualusernoticemessage" class="tsd-kind-icon">Ritual<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#ritualusernoticemessage" class="tsd-kind-icon">Ritual<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="globals.html#selectkeys" class="tsd-kind-icon">Select<wbr>Keys</a>
+						<a href="modules.html#selectkeys" class="tsd-kind-icon">Select<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#streaksubparams" class="tsd-kind-icon">Streak<wbr>Sub<wbr>Params</a>
+						<a href="modules.html#streaksubparams" class="tsd-kind-icon">Streak<wbr>Sub<wbr>Params</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#subeventparams" class="tsd-kind-icon">Sub<wbr>Event<wbr>Params</a>
+						<a href="modules.html#subeventparams" class="tsd-kind-icon">Sub<wbr>Event<wbr>Params</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#subusernoticemessage" class="tsd-kind-icon">Sub<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#subusernoticemessage" class="tsd-kind-icon">Sub<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#subgiftusernoticemessage" class="tsd-kind-icon">Subgift<wbr>Usernotice<wbr>Message</a>
+						<a href="modules.html#subgiftusernoticemessage" class="tsd-kind-icon">Subgift<wbr>Usernotice<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#transportconfiguration" class="tsd-kind-icon">Transport<wbr>Configuration</a>
+						<a href="modules.html#transportconfiguration" class="tsd-kind-icon">Transport<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#twitchcommands" class="tsd-kind-icon">Twitch<wbr>Commands</a>
+						<a href="modules.html#twitchcommands" class="tsd-kind-icon">Twitch<wbr>Commands</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#twitchemotelist" class="tsd-kind-icon">Twitch<wbr>Emote<wbr>List</a>
+						<a href="modules.html#twitchemotelist" class="tsd-kind-icon">Twitch<wbr>Emote<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#twitchemotesets" class="tsd-kind-icon">Twitch<wbr>Emote<wbr>Sets</a>
+						<a href="modules.html#twitchemotesets" class="tsd-kind-icon">Twitch<wbr>Emote<wbr>Sets</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#twitchflaglist" class="tsd-kind-icon">Twitch<wbr>Flag<wbr>List</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#twitchmessageevents" class="tsd-kind-icon">Twitch<wbr>Message<wbr>Events</a>
+						<a href="modules.html#twitchmessageevents" class="tsd-kind-icon">Twitch<wbr>Message<wbr>Events</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#max_outgoing_command_length" class="tsd-kind-icon">MAX_<wbr>OUTGOING_<wbr>COMMAND_<wbr>LENGTH</a>
+						<a href="modules.html#max_outgoing_command_length" class="tsd-kind-icon">MAX_<wbr>OUTGOING_<wbr>COMMAND_<wbr>LENGTH</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#max_outgoing_line_length" class="tsd-kind-icon">MAX_<wbr>OUTGOING_<wbr>LINE_<wbr>LENGTH</a>
+						<a href="modules.html#max_outgoing_line_length" class="tsd-kind-icon">MAX_<wbr>OUTGOING_<wbr>LINE_<wbr>LENGTH</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#valid_cmd_regex" class="tsd-kind-icon">VALID_<wbr>CMD_<wbr>REGEX</a>
+						<a href="modules.html#commandclassmap" class="tsd-kind-icon">command<wbr>Class<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#actionregex" class="tsd-kind-icon">action<wbr>Regex</a>
+						<a href="modules.html#invisiblesuffix" class="tsd-kind-icon">invisible<wbr>Suffix</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#anonymoususernameregex" class="tsd-kind-icon">anonymous<wbr>Username<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#badnoticeids" class="tsd-kind-icon">bad<wbr>NoticeIDs</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#camelcase" class="tsd-kind-icon">camel<wbr>Case</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#channelnameregex" class="tsd-kind-icon">channel<wbr>Name<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#commandclassmap" class="tsd-kind-icon">command<wbr>Class<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#connectionidcounter" class="tsd-kind-icon">connectionIDCounter</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#decodelookupregex" class="tsd-kind-icon">decode<wbr>Lookup<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#failurenoticeids" class="tsd-kind-icon">failure<wbr>NoticeIDs</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#invisiblesuffix" class="tsd-kind-icon">invisible<wbr>Suffix</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#log" class="tsd-kind-icon">log</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ms" class="tsd-kind-icon">ms</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#pickby" class="tsd-kind-icon">pick<wbr>By</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#rgbcolorregex" class="tsd-kind-icon">rgb<wbr>Color<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#successnoticeids" class="tsd-kind-icon">success<wbr>NoticeIDs</a>
+						<a href="modules.html#messageratelimitpresets" class="tsd-kind-icon">message<wbr>Rate<wbr>Limit<wbr>Presets</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#acknowledgescapabilities" class="tsd-kind-icon">acknowledges<wbr>Capabilities</a>
+						<a href="modules.html#acknowledgescapabilities" class="tsd-kind-icon">acknowledges<wbr>Capabilities</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#alwaysfalse" class="tsd-kind-icon">always<wbr>False</a>
+						<a href="modules.html#alwaysfalse" class="tsd-kind-icon">always<wbr>False</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#alwaystrue" class="tsd-kind-icon">always<wbr>True</a>
+						<a href="modules.html#alwaystrue" class="tsd-kind-icon">always<wbr>True</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#anycauseinstanceof" class="tsd-kind-icon">any<wbr>Cause<wbr>Instanceof</a>
+						<a href="modules.html#anycauseinstanceof" class="tsd-kind-icon">any<wbr>Cause<wbr>Instanceof</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#applyreplacement" class="tsd-kind-icon">apply<wbr>Replacement</a>
+						<a href="modules.html#applyreplacement" class="tsd-kind-icon">apply<wbr>Replacement</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#applyreplacements" class="tsd-kind-icon">apply<wbr>Replacements</a>
+						<a href="modules.html#applyreplacements" class="tsd-kind-icon">apply<wbr>Replacements</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#asserterrorchain" class="tsd-kind-icon">assert<wbr>Error<wbr>Chain</a>
+						<a href="modules.html#awaitjoinresponse" class="tsd-kind-icon">await<wbr>Join<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#assertlink" class="tsd-kind-icon">assert<wbr>Link</a>
+						<a href="modules.html#awaitpartresponse" class="tsd-kind-icon">await<wbr>Part<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#assertthrowschain" class="tsd-kind-icon">assert<wbr>Throws<wbr>Chain</a>
+						<a href="modules.html#awaitresponse" class="tsd-kind-icon">await<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#awaitjoinresponse" class="tsd-kind-icon">await<wbr>Join<wbr>Response</a>
+						<a href="modules.html#ban" class="tsd-kind-icon">ban</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#awaitpartresponse" class="tsd-kind-icon">await<wbr>Part<wbr>Response</a>
+						<a href="modules.html#canspamfast" class="tsd-kind-icon">can<wbr>Spam<wbr>Fast</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#awaitresponse" class="tsd-kind-icon">await<wbr>Response</a>
+						<a href="modules.html#causeof" class="tsd-kind-icon">cause<wbr>Of</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#ban" class="tsd-kind-icon">ban</a>
+						<a href="modules.html#colortohexstring" class="tsd-kind-icon">color<wbr>ToHex<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#canspamfast" class="tsd-kind-icon">can<wbr>Spam<wbr>Fast</a>
+						<a href="modules.html#converttobadges" class="tsd-kind-icon">convert<wbr>ToBadges</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#causeof" class="tsd-kind-icon">cause<wbr>Of</a>
+						<a href="modules.html#converttoboolean" class="tsd-kind-icon">convert<wbr>ToBoolean</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#colortohexstring" class="tsd-kind-icon">color<wbr>ToHex<wbr>String</a>
+						<a href="modules.html#converttocolor" class="tsd-kind-icon">convert<wbr>ToColor</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttobadges" class="tsd-kind-icon">convert<wbr>ToBadges</a>
+						<a href="modules.html#converttoemotesets" class="tsd-kind-icon">convert<wbr>ToEmote<wbr>Sets</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoboolean" class="tsd-kind-icon">convert<wbr>ToBoolean</a>
+						<a href="modules.html#converttoemotes" class="tsd-kind-icon">convert<wbr>ToEmotes</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttocolor" class="tsd-kind-icon">convert<wbr>ToColor</a>
+						<a href="modules.html#converttoflags" class="tsd-kind-icon">convert<wbr>ToFlags</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoemotesets" class="tsd-kind-icon">convert<wbr>ToEmote<wbr>Sets</a>
+						<a href="modules.html#converttoint" class="tsd-kind-icon">convert<wbr>ToInt</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoemotes" class="tsd-kind-icon">convert<wbr>ToEmotes</a>
+						<a href="modules.html#converttostring" class="tsd-kind-icon">convert<wbr>ToString</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoflags" class="tsd-kind-icon">convert<wbr>ToFlags</a>
+						<a href="modules.html#converttotimestamp" class="tsd-kind-icon">convert<wbr>ToTimestamp</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoint" class="tsd-kind-icon">convert<wbr>ToInt</a>
+						<a href="modules.html#correctchannelname" class="tsd-kind-icon">correct<wbr>Channel<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttostring" class="tsd-kind-icon">convert<wbr>ToString</a>
+						<a href="modules.html#decodevalue" class="tsd-kind-icon">decode<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttotimestamp" class="tsd-kind-icon">convert<wbr>ToTimestamp</a>
+						<a href="modules.html#deniedanycapability" class="tsd-kind-icon">denied<wbr>Any<wbr>Capability</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#correctchannelname" class="tsd-kind-icon">correct<wbr>Channel<wbr>Name</a>
+						<a href="modules.html#expandconfig" class="tsd-kind-icon">expand<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#createmocktransport" class="tsd-kind-icon">create<wbr>Mock<wbr>Transport</a>
+						<a href="modules.html#expandratelimitsconfig" class="tsd-kind-icon">expand<wbr>Rate<wbr>Limits<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#decodevalue" class="tsd-kind-icon">decode<wbr>Value</a>
+						<a href="modules.html#expandtransportconfig" class="tsd-kind-icon">expand<wbr>Transport<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#deniedanycapability" class="tsd-kind-icon">denied<wbr>Any<wbr>Capability</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#errorof" class="tsd-kind-icon">error<wbr>Of</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#expandconfig" class="tsd-kind-icon">expand<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#expandratelimitsconfig" class="tsd-kind-icon">expand<wbr>Rate<wbr>Limits<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#expandtransportconfig" class="tsd-kind-icon">expand<wbr>Transport<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#extracteventparams" class="tsd-kind-icon">extract<wbr>Event<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#fakeclient" class="tsd-kind-icon">fake<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#fakeconnection" class="tsd-kind-icon">fake<wbr>Connection</a>
+						<a href="modules.html#extracteventparams" class="tsd-kind-icon">extract<wbr>Event<wbr>Params</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#findandpushtoend" class="tsd-kind-icon">find<wbr>And<wbr>Push<wbr>ToEnd</a>
+						<a href="modules.html#findandpushtoend" class="tsd-kind-icon">find<wbr>And<wbr>Push<wbr>ToEnd</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getcamelcasedname" class="tsd-kind-icon">get<wbr>Camel<wbr>Cased<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#findbypredicate" class="tsd-kind-icon">find<wbr>ByPredicate</a>
+						<a href="modules.html#getdata" class="tsd-kind-icon">get<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getcamelcasedname" class="tsd-kind-icon">get<wbr>Camel<wbr>Cased<wbr>Name</a>
+						<a href="modules.html#getircchannelname" class="tsd-kind-icon">getIRCChannel<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getparameter" class="tsd-kind-icon">get<wbr>Parameter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#handlereconnectmessage" class="tsd-kind-icon">handle<wbr>Reconnect<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#hasallstatetags" class="tsd-kind-icon">has<wbr>All<wbr>State<wbr>Tags</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#ignoreerrors" class="tsd-kind-icon">ignore<wbr>Errors</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isanonymoususername" class="tsd-kind-icon">is<wbr>Anonymous<wbr>Username</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#joinall" class="tsd-kind-icon">join<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#joinchannel" class="tsd-kind-icon">join<wbr>Channel</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#joinnothingtodo" class="tsd-kind-icon">join<wbr>Nothing<wbr>ToDo</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#maketransport" class="tsd-kind-icon">make<wbr>Transport</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#me" class="tsd-kind-icon">me</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseactionandmessage" class="tsd-kind-icon">parse<wbr>Action<wbr>And<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsebadges" class="tsd-kind-icon">parse<wbr>Badges</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsecolor" class="tsd-kind-icon">parse<wbr>Color</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseemotesets" class="tsd-kind-icon">parse<wbr>Emote<wbr>Sets</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseemotes" class="tsd-kind-icon">parse<wbr>Emotes</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsehostedchannelname" class="tsd-kind-icon">parse<wbr>Hosted<wbr>Channel<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsehosttargetparameter" class="tsd-kind-icon">parse<wbr>Hosttarget<wbr>Parameter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseircmessage" class="tsd-kind-icon">parseIRCMessage</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseintthrowing" class="tsd-kind-icon">parse<wbr>Int<wbr>Throwing</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsesinglebadge" class="tsd-kind-icon">parse<wbr>Single<wbr>Badge</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsetags" class="tsd-kind-icon">parse<wbr>Tags</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parsetwitchmessage" class="tsd-kind-icon">parse<wbr>Twitch<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#parseviewercount" class="tsd-kind-icon">parse<wbr>Viewer<wbr>Count</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#partchannel" class="tsd-kind-icon">part<wbr>Channel</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#partnothingtodo" class="tsd-kind-icon">part<wbr>Nothing<wbr>ToDo</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#reasonforvalue" class="tsd-kind-icon">reason<wbr>For<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#removecommands" class="tsd-kind-icon">remove<wbr>Commands</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#getdata" class="tsd-kind-icon">get<wbr>Data</a>
+						<a href="modules.html#removeinplace" class="tsd-kind-icon">remove<wbr>InPlace</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getircchannelname" class="tsd-kind-icon">getIRCChannel<wbr>Name</a>
+						<a href="modules.html#replytoserverping" class="tsd-kind-icon">reply<wbr>ToServer<wbr>Ping</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getmods" class="tsd-kind-icon">get<wbr>Mods</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#getmodsorvips" class="tsd-kind-icon">get<wbr>Mods<wbr>OrVips</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#getparameter" class="tsd-kind-icon">get<wbr>Parameter</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#getvips" class="tsd-kind-icon">get<wbr>Vips</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#handlereconnectmessage" class="tsd-kind-icon">handle<wbr>Reconnect<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#hasallstatetags" class="tsd-kind-icon">has<wbr>All<wbr>State<wbr>Tags</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#ignoreerrors" class="tsd-kind-icon">ignore<wbr>Errors</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#isanonymoususername" class="tsd-kind-icon">is<wbr>Anonymous<wbr>Username</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#joinall" class="tsd-kind-icon">join<wbr>All</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#joinchannel" class="tsd-kind-icon">join<wbr>Channel</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#joinnothingtodo" class="tsd-kind-icon">join<wbr>Nothing<wbr>ToDo</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#maketransport" class="tsd-kind-icon">make<wbr>Transport</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#matchingnotice" class="tsd-kind-icon">matching<wbr>Notice</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#maxjoinedchannels" class="tsd-kind-icon">max<wbr>Joined<wbr>Channels</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#me" class="tsd-kind-icon">me</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#mustnotbejoined" class="tsd-kind-icon">must<wbr>Not<wbr>BeJoined</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseactionandmessage" class="tsd-kind-icon">parse<wbr>Action<wbr>And<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsebadges" class="tsd-kind-icon">parse<wbr>Badges</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsecolor" class="tsd-kind-icon">parse<wbr>Color</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseemotesets" class="tsd-kind-icon">parse<wbr>Emote<wbr>Sets</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseemotes" class="tsd-kind-icon">parse<wbr>Emotes</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseflags" class="tsd-kind-icon">parse<wbr>Flags</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsehostedchannelname" class="tsd-kind-icon">parse<wbr>Hosted<wbr>Channel<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsehosttargetparameter" class="tsd-kind-icon">parse<wbr>Hosttarget<wbr>Parameter</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseircmessage" class="tsd-kind-icon">parseIRCMessage</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseintthrowing" class="tsd-kind-icon">parse<wbr>Int<wbr>Throwing</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsesinglebadge" class="tsd-kind-icon">parse<wbr>Single<wbr>Badge</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsetags" class="tsd-kind-icon">parse<wbr>Tags</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parsetwitchmessage" class="tsd-kind-icon">parse<wbr>Twitch<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#parseviewercount" class="tsd-kind-icon">parse<wbr>Viewer<wbr>Count</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#partchannel" class="tsd-kind-icon">part<wbr>Channel</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#partnothingtodo" class="tsd-kind-icon">part<wbr>Nothing<wbr>ToDo</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#randompingidentifier" class="tsd-kind-icon">random<wbr>Ping<wbr>Identifier</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#reasonforvalue" class="tsd-kind-icon">reason<wbr>For<wbr>Value</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#removecommands" class="tsd-kind-icon">remove<wbr>Commands</a>
+						<a href="modules.html#requestcapabilities" class="tsd-kind-icon">request<wbr>Capabilities</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#removeinplace" class="tsd-kind-icon">remove<wbr>InPlace</a>
+						<a href="modules.html#requiredata" class="tsd-kind-icon">require<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#replytoserverping" class="tsd-kind-icon">reply<wbr>ToServer<wbr>Ping</a>
+						<a href="modules.html#requirenickname" class="tsd-kind-icon">require<wbr>Nickname</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#requestcapabilities" class="tsd-kind-icon">request<wbr>Capabilities</a>
+						<a href="modules.html#requireparameter" class="tsd-kind-icon">require<wbr>Parameter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#say" class="tsd-kind-icon">say</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#sendclientpings" class="tsd-kind-icon">send<wbr>Client<wbr>Pings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#sendlogin" class="tsd-kind-icon">send<wbr>Login</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#sendping" class="tsd-kind-icon">send<wbr>Ping</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#sendprivmsg" class="tsd-kind-icon">send<wbr>Privmsg</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#requiredata" class="tsd-kind-icon">require<wbr>Data</a>
+						<a href="modules.html#setdefaults" class="tsd-kind-icon">set<wbr>Defaults</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#requirenickname" class="tsd-kind-icon">require<wbr>Nickname</a>
+						<a href="modules.html#splitintochunks" class="tsd-kind-icon">split<wbr>Into<wbr>Chunks</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#requireparameter" class="tsd-kind-icon">require<wbr>Parameter</a>
+						<a href="modules.html#tagparserfor" class="tsd-kind-icon">tag<wbr>Parser<wbr>For</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#say" class="tsd-kind-icon">say</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#sendclientpings" class="tsd-kind-icon">send<wbr>Client<wbr>Pings</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#sendlogin" class="tsd-kind-icon">send<wbr>Login</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#sendping" class="tsd-kind-icon">send<wbr>Ping</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#sendprivmsg" class="tsd-kind-icon">send<wbr>Privmsg</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#setcolor" class="tsd-kind-icon">set<wbr>Color</a>
+						<a href="modules.html#timeout" class="tsd-kind-icon">timeout</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#setdefaults" class="tsd-kind-icon">set<wbr>Defaults</a>
+						<a href="modules.html#unionsets" class="tsd-kind-icon">union<wbr>Sets</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#splitintochunks" class="tsd-kind-icon">split<wbr>Into<wbr>Chunks</a>
+						<a href="modules.html#validatechannelname" class="tsd-kind-icon">validate<wbr>Channel<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#successresponsesforchannelchunk" class="tsd-kind-icon">success<wbr>Responses<wbr>For<wbr>Channel<wbr>Chunk</a>
+						<a href="modules.html#validateirccommand" class="tsd-kind-icon">validateIRCCommand</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#tagparserfor" class="tsd-kind-icon">tag<wbr>Parser<wbr>For</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#timeout" class="tsd-kind-icon">timeout</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#topaddedhex" class="tsd-kind-icon">to<wbr>Padded<wbr>Hex</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#unionsets" class="tsd-kind-icon">union<wbr>Sets</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#validatechannelname" class="tsd-kind-icon">validate<wbr>Channel<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#validateirccommand" class="tsd-kind-icon">validateIRCCommand</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#whisper" class="tsd-kind-icon">whisper</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#configdefaults" class="tsd-kind-icon">config<wbr>Defaults</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#convertersmap" class="tsd-kind-icon">converters<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#decodemap" class="tsd-kind-icon">decode<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#defaults" class="tsd-kind-icon">defaults</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#getmodsinfo" class="tsd-kind-icon">get<wbr>Mods<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#getvipsinfo" class="tsd-kind-icon">get<wbr>Vips<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#messageratelimitpresets" class="tsd-kind-icon">message<wbr>Rate<wbr>Limit<wbr>Presets</a>
+						<a href="modules.html#whisper" class="tsd-kind-icon">whisper</a>
 					</li>
 				</ul>
 			</nav>
